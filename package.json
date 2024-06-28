@@ -1,0 +1,42 @@
+{
+	"name": "proper-event",
+	"version": "0.0.0",
+	"description": "Given an event type, automatically get the correct event class (click -> MouseEvent)",
+	"keywords": [
+		"browser",
+		"events",
+		"MouseEvent",
+		"KeyboardEvent",
+		"CustomEvent"
+	],
+	"repository": "fregante/proper-event",
+	"funding": "https://github.com/sponsors/fregante",
+	"license": "MIT",
+	"author": "Federico Brigante <me@fregante.com> (https://fregante.com)",
+	"type": "module",
+	"exports": "./distribution/index.js",
+	"types": "./distribution/index.d.ts",
+	"files": [
+		"index.js",
+		"index.d.ts"
+	],
+	"scripts": {
+		"build": "tsc",
+		"prepack": "tsc --sourceMap false",
+		"test": "xo && tsc --noEmit",
+		"watch": "tsc --watch"
+	},
+	"xo": {
+		"envs": [
+			"browser"
+		]
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^6.0.0",
+		"typescript": "^5.5.2",
+		"xo": "^0.58.0"
+	},
+	"engines": {
+		"node": ">=20"
+	}
+}
