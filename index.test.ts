@@ -8,7 +8,9 @@ test('click', () => {
 	const event = properEvent('click');
 	expectTypeOf(event).toEqualTypeOf<MouseEvent>();
 	expect(event).toBeInstanceOf(MouseEvent);
+	expect(event).toBeInstanceOf(UIEvent);
 	expect(event.type).toBe('click');
+	expect(event.altKey).toBe(false);
 });
 
 test('any', () => {
@@ -19,12 +21,12 @@ test('any', () => {
 
 test('click with init', () => {
 	const event = properEvent('click', {
-		which: 1,
+		altKey: true,
 	});
 	expectTypeOf(event).toEqualTypeOf<MouseEvent>();
 	expect(event).toBeInstanceOf(MouseEvent);
 	expect(event.type).toBe('click');
-	expect(event.which).toBe(1);
+	expect(event.altKey).toBe(true);
 });
 
 test('custom with init', () => {
@@ -42,7 +44,7 @@ test('formdata', () => {
 	// @ts-expect-error Missing in happy-dom. Replace with global FormDataEvent after using https://vitest.dev/guide/browser/
 	eventMap.formdata = Event;
 
-	const formdata: FormDataEvent = properEvent('formdata', {
+	const formdata = properEvent('formdata', {
 		formData: {} as unknown as FormData,
 	});
 	expectTypeOf(formdata).toEqualTypeOf<FormDataEvent>();

@@ -39,7 +39,7 @@ type EventInits = {
 	focus: FocusEventInit;
 	focusin: FocusEventInit;
 	focusout: FocusEventInit;
-	// formdata: FormDataEventInit; // This breaks the types… but it's still handled
+	// Formdata: FormDataEventInit; // This breaks the types… but it's still handled
 	gotpointercapture: PointerEventInit;
 	input: EventInit;
 	invalid: EventInit;
@@ -137,7 +137,7 @@ export const eventMap = {
 	dragstart: globalThis.DragEvent,
 	drop: globalThis.DragEvent,
 	durationchange: globalThis.Event,
-	// formdata: globalThis.FormDataEvent, // This breaks the types… but it's still handled
+	// Formdata: globalThis.FormDataEvent, // This breaks the types… but it's still handled
 	emptied: globalThis.Event,
 	ended: globalThis.Event,
 	error: globalThis.ErrorEvent,
