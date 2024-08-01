@@ -1,17 +1,120 @@
+// Update and keep in sync with `GlobalEventHandlersEventMap`
+// https://github.com/microsoft/TypeScript/blob/41b993bebe01c3401269839ffda4ae9a422ebb6b/src/lib/dom.generated.d.ts#L8901
+
 const events = {
-	click: MouseEvent,
+	abort: globalThis.UIEvent,
+	animationcancel: globalThis.AnimationEvent,
+	animationend: globalThis.AnimationEvent,
+	animationiteration: globalThis.AnimationEvent,
+	animationstart: globalThis.AnimationEvent,
+	auxclick: globalThis.MouseEvent,
+	beforeinput: globalThis.InputEvent,
+	beforetoggle: globalThis.Event,
+	blur: globalThis.FocusEvent,
+	cancel: globalThis.Event,
+	canplay: globalThis.Event,
+	canplaythrough: globalThis.Event,
+	change: globalThis.Event,
+	click: globalThis.MouseEvent,
+	close: globalThis.Event,
+	compositionend: globalThis.CompositionEvent,
+	compositionstart: globalThis.CompositionEvent,
+	compositionupdate: globalThis.CompositionEvent,
+	contextmenu: globalThis.MouseEvent,
+	copy: globalThis.ClipboardEvent,
+	cuechange: globalThis.Event,
+	cut: globalThis.ClipboardEvent,
+	dblclick: globalThis.MouseEvent,
+	drag: globalThis.DragEvent,
+	dragend: globalThis.DragEvent,
+	dragenter: globalThis.DragEvent,
+	dragleave: globalThis.DragEvent,
+	dragover: globalThis.DragEvent,
+	dragstart: globalThis.DragEvent,
+	drop: globalThis.DragEvent,
+	durationchange: globalThis.Event,
+	emptied: globalThis.Event,
+	ended: globalThis.Event,
+	error: globalThis.ErrorEvent,
+	focus: globalThis.FocusEvent,
+	focusin: globalThis.FocusEvent,
+	focusout: globalThis.FocusEvent,
+	formdata: globalThis.FormDataEvent,
+	gotpointercapture: globalThis.PointerEvent,
+	input: globalThis.Event,
+	invalid: globalThis.Event,
+	keydown: globalThis.KeyboardEvent,
+	keypress: globalThis.KeyboardEvent,
+	keyup: globalThis.KeyboardEvent,
+	load: globalThis.Event,
+	loadeddata: globalThis.Event,
+	loadedmetadata: globalThis.Event,
+	loadstart: globalThis.Event,
+	lostpointercapture: globalThis.PointerEvent,
+	mousedown: globalThis.MouseEvent,
+	mouseenter: globalThis.MouseEvent,
+	mouseleave: globalThis.MouseEvent,
+	mousemove: globalThis.MouseEvent,
+	mouseout: globalThis.MouseEvent,
+	mouseover: globalThis.MouseEvent,
+	mouseup: globalThis.MouseEvent,
+	paste: globalThis.ClipboardEvent,
+	pause: globalThis.Event,
+	play: globalThis.Event,
+	playing: globalThis.Event,
+	pointercancel: globalThis.PointerEvent,
+	pointerdown: globalThis.PointerEvent,
+	pointerenter: globalThis.PointerEvent,
+	pointerleave: globalThis.PointerEvent,
+	pointermove: globalThis.PointerEvent,
+	pointerout: globalThis.PointerEvent,
+	pointerover: globalThis.PointerEvent,
+	pointerup: globalThis.PointerEvent,
+	progress: globalThis.ProgressEvent,
+	ratechange: globalThis.Event,
+	reset: globalThis.Event,
+	resize: globalThis.UIEvent,
+	scroll: globalThis.Event,
+	scrollend: globalThis.Event,
+	securitypolicyviolation: globalThis.SecurityPolicyViolationEvent,
+	seeked: globalThis.Event,
+	seeking: globalThis.Event,
+	select: globalThis.Event,
+	selectionchange: globalThis.Event,
+	selectstart: globalThis.Event,
+	slotchange: globalThis.Event,
+	stalled: globalThis.Event,
+	submit: globalThis.SubmitEvent,
+	suspend: globalThis.Event,
+	timeupdate: globalThis.Event,
+	toggle: globalThis.Event,
+	touchcancel: globalThis.TouchEvent,
+	touchend: globalThis.TouchEvent,
+	touchmove: globalThis.TouchEvent,
+	touchstart: globalThis.TouchEvent,
+	transitioncancel: globalThis.TransitionEvent,
+	transitionend: globalThis.TransitionEvent,
+	transitionrun: globalThis.TransitionEvent,
+	transitionstart: globalThis.TransitionEvent,
+	volumechange: globalThis.Event,
+	waiting: globalThis.Event,
+	webkitanimationend: globalThis.Event,
+	webkitanimationiteration: globalThis.Event,
+	webkitanimationstart: globalThis.Event,
+	webkittransitionend: globalThis.Event,
+	wheel: globalThis.WheelEvent,
 } as const;
 type Events = typeof events;
 
-function createEvent<Name extends keyof Events>(name: Name): Events[Name]['prototype'];
-function createEvent<Name extends string>(name: Name): CustomEvent;
-function createEvent<Name extends keyof Events>(name: Name): Events[Name]['prototype'] | CustomEvent {
-	return events[name] ? new events[name](name) : new CustomEvent(name);
+function properEvent<Name extends keyof Events>(name: Name, options?: EventInit): Events[Name]['prototype'];
+function properEvent<Name extends string>(name: Name, options?: EventInit): CustomEvent;
+function properEvent<Name extends keyof Events>(name: Name, options?: EventInit): Events[Name]['prototype'] | CustomEvent {
+	return events[name] ? new events[name](name, options) : new CustomEvent(name, options);
 }
 
-const click: MouseEvent = createEvent('click');
+const click: MouseEvent = properEvent('click');
 document.dispatchEvent(click);
-const any: CustomEvent = createEvent('any');
+const any: CustomEvent = properEvent('any');
 document.dispatchEvent(any);
 
-export default createEvent;
+export default properEvent;

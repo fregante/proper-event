@@ -1,6 +1,6 @@
 # proper-event [![npm version](https://img.shields.io/npm/v/proper-event.svg)](https://www.npmjs.com/package/proper-event)
 
-> Given an event type, automatically get the correct event class (click -> MouseEvent)
+> Given an event type, automatically get the correct event class (`'click'` -> `MouseEvent`)
 
 ## Install
 
