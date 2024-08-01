@@ -17,8 +17,8 @@
 	"exports": "./distribution/index.js",
 	"types": "./distribution/index.d.ts",
 	"files": [
-		"index.js",
-		"index.d.ts"
+		"distribution/index.js",
+		"distribution/index.d.ts"
 	],
 	"scripts": {
 		"build": "tsc",
