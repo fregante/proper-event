@@ -39,6 +39,7 @@ type EventInits = {
 	focus: FocusEventInit;
 	focusin: FocusEventInit;
 	focusout: FocusEventInit;
+	// formdata: FormDataEventInit; // This breaks the types… but it's still handled
 	gotpointercapture: PointerEventInit;
 	input: EventInit;
 	invalid: EventInit;
@@ -104,7 +105,7 @@ type EventInits = {
 	wheel: WheelEventInit;
 };
 
-const events = {
+export const eventMap = {
 	abort: globalThis.UIEvent,
 	animationcancel: globalThis.AnimationEvent,
 	animationend: globalThis.AnimationEvent,
@@ -136,6 +137,7 @@ const events = {
 	dragstart: globalThis.DragEvent,
 	drop: globalThis.DragEvent,
 	durationchange: globalThis.Event,
+	// formdata: globalThis.FormDataEvent, // This breaks the types… but it's still handled
 	emptied: globalThis.Event,
 	ended: globalThis.Event,
 	error: globalThis.ErrorEvent,
@@ -207,26 +209,17 @@ const events = {
 	wheel: globalThis.WheelEvent,
 } as const;
 
-type Events = typeof events;
+type Events = typeof eventMap;
 
-function properEvent<Name extends keyof Events>(name: Name, options?: EventInits[Name]): InstanceType<Events[Name]>;
-function properEvent<Name extends string>(name: Name, options?: CustomEventInit): CustomEvent;
+function properEvent(type: 'formdata', options: FormDataEventInit): FormDataEvent;
+function properEvent<Name extends keyof Events>(name: Name extends 'formdata' ? never : Name, options?: EventInits[Name]): InstanceType<Events[Name]>;
+function properEvent<Name extends string>(name: Name extends 'formdata' ? '🔥 The form data event requires a second argument of type FormDataEventInit' : Name, options?: CustomEventInit): CustomEvent;
 function properEvent<Name extends string>(name: Name, options?: EventInit): Event {
-	if (name in events) {
-		return new events[name as keyof Events](name, options);
+	if (name in eventMap) {
+		return new eventMap[name as keyof Events](name, options);
 	}
 
 	return new CustomEvent(name, options);
 }
-
-const click: MouseEvent = properEvent('click', {
-	which: 1,
-});
-document.dispatchEvent(click);
-const any: CustomEvent = properEvent('any', {
-	bubbles: true,
-	detail: 1,
-});
-document.dispatchEvent(any);
 
 export default properEvent;
