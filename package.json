@@ -1,6 +1,6 @@
 {
 	"name": "proper-event",
-	"version": "0.9.1",
+	"version": "0.9.2",
 	"description": "Given an event type, automatically get the correct event class (click -> MouseEvent)",
 	"keywords": [
 		"browser",
