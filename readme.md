@@ -27,7 +27,7 @@ replacing it with:
 const event = properEvent(type);
 ```
 
-See the list of supported events in the [./index.js](./index.js) file. If the event is not known or not supported by the current platform, you will get a `CustomEvent` instance.
+See the list of supported events in the [index.ts](./index.ts) file. If the event is not known or not supported by the current platform, you will get a `CustomEvent` instance.
 
 ## Install
 
