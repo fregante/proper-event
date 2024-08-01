@@ -23,7 +23,7 @@
 	"scripts": {
 		"build": "tsc",
 		"prepack": "tsc --sourceMap false",
-		"test": "xo && tsc --noEmit",
+		"test": "xo && tsc --noEmit && vitest run --typecheck",
 		"watch": "tsc --watch"
 	},
 	"xo": {
@@ -33,7 +33,9 @@
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^6.0.0",
+		"happy-dom": "^14.12.3",
 		"typescript": "^5.5.2",
+		"vitest": "^2.0.5",
 		"xo": "^0.58.0"
 	},
 	"engines": {
