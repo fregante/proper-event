@@ -1,33 +1,33 @@
-# proper-event [![npm version](https://img.shields.io/npm/v/proper-event.svg)](https://www.npmjs.com/package/proper-event)
+# Proper Event [![npm version](https://img.shields.io/npm/v/proper-event.svg)](https://www.npmjs.com/package/proper-event)
+    
+Crikey, tell event type, automatically get the correct event class (`'click'` -> `MouseEvent`)
 
-> Given an event type, automatically get the correct event class (`'click'` -> `MouseEvent`)
-
-`properEvent` is meant to be used when you want to trigger a number of events in a loop or when the event type is user-provided. It avoids code like:
+`properEvent` is for when you're arsed about triggering events in a loop or dealing with user-provided event types. It saves you from writing this bollocks:
 
 ```js
 switch (type) {
-	case 'click':
-		event = new MouseEvent('click');
-		break;
-	case 'keydown':
-		event = new KeyboardEvent('keydown');
-		break;
-	case 'submit':
-		event = new Event('submit');
-		break;
-	default:
-		event = new CustomEvent(type);
-		break;
+    case 'click':
+        event = new MouseEvent('click');
+        break;
+    case 'keydown':
+        event = new KeyboardEvent('keydown');
+        break;
+    case 'submit':
+        event = new Event('submit');
+        break;
+    default:
+        event = new CustomEvent(type);
+        break;
 }
 ```
 
-replacing it with:
+Instead, you can just do:
 
 ```js
 const event = properEvent(type);
 ```
 
-See the list of supported events in the [index.ts](./index.ts) file. If the event is not known or not supported by the current platform, you will get a `CustomEvent` instance.
+Check the [index.ts](./index.ts) file for supported events. If it's not there or your platform's being a muppet, you'll get a `CustomEvent` instance.
 
 ## Install
 
@@ -37,10 +37,12 @@ npm install proper-event
 
 ## Usage
 
+Here's how you use this thing:
+
 ```js
 import properEvent from 'proper-event';
 
-const event = properEvent(prompt('What event should be triggered?'));
+const event = properEvent(prompt('What event should we trigger, mate?'));
 
 document.querySelector('a').dispatchEvent(event);
 ```
@@ -49,9 +51,7 @@ document.querySelector('a').dispatchEvent(event);
 
 ### properEvent(type, init?)
 
-Provide a type like `'click'` and get the corresponding event instance, like `new MouseEvent('click')`
-
-If none is found, you will get a `CustomEvent` instance.
+Give it a type like `'click'` and get the right event instance back. Simple as.
 
 ```js
 import properEvent from 'proper-event';
@@ -63,7 +63,7 @@ const event = properEvent('click');
 
 Type: `string`
 
-The event type to be triggered, like `'click'`,`'submit'`, `'keydown'`, etc.
+The event type you want, like `'click'`, `'submit'`, `'keydown'`, whatever.
 
 ### init
 
@@ -71,8 +71,10 @@ Type: `EventInit`
 
 Optional
 
-The event options, like `{ bubbles: true, altKey: true }`. This is the same as the second argument of `new Event(type, init)`.
+Event options, if you're feeling fancy. Same as the second argument of `new Event(type, init)`.
 
 ## License
+
+Do what you want with it, just don't be a twat.
 
 MIT © [Federico Brigante](https://fregante.com)
